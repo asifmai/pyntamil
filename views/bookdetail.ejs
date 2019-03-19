@@ -132,9 +132,8 @@
                 </div>
                 <% } %>
               </div>
-              <button class="btn btn-primary leftLst">
-                <</button> <button class="btn btn-primary rightLst">>
-              </button>
+              <button class="btn btn-primary leftLst"><</button> 
+              <button class="btn btn-primary rightLst">></button>
             </div>
           </div>
         </div>
@@ -148,6 +147,7 @@
   <script src="/javascripts/multicarousel.js"></script>
   <script>
     $(document).ready(function () {
+      showHideButtons();
       var score = eval(<%- JSON.stringify(score) %>)
       var book = eval(<%- JSON.stringify(book) %>)
       var fullScore = Math.round(score)
@@ -187,7 +187,40 @@
           success: function (response) {}
         });
       });
+
+      $(window).resize(function () { 
+        showHideButtons();
+      });
     });
+
+    function showHideButtons() {
+      const items = $('.MultiCarousel-inner .item').length;
+      const width = $(window).width();
+
+      if (items == 1) {
+        $('.leftLst').addClass('d-none')
+        $('.rightLst').addClass('d-none')
+      } else if (items == 2) {
+        if (width < 768) {
+          $('.leftLst').removeClass('d-none')
+          $('.rightLst').removeClass('d-none')
+        } else {
+          $('.leftLst').addClass('d-none')
+          $('.rightLst').addClass('d-none')
+        }
+      } else if (items < 5) {
+        if (width < 992) {
+          $('.leftLst').removeClass('d-none')
+          $('.rightLst').removeClass('d-none')
+        } else {
+          $('.leftLst').addClass('d-none')
+          $('.rightLst').addClass('d-none')
+        }
+      } else if (items > 4) {
+        $('.leftLst').removeClass('d-none')
+        $('.rightLst').removeClass('d-none')
+      }
+    }
   </script>
 </body>
 
