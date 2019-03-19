@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ta">
+
+<head>
+  <% include partials/commonhead %>
+  <link rel="stylesheet" href="/stylesheets/readbook.css">
+</head>
+
+<body>
+  <div class="body-wrapper">
+    <% include partials/header %>
+    <% include partials/stbutton %>
+    <i class="fas fa-spinner fa-pulse"></i>
+    <div class="body-content">
+      <section id="book-content">
+        <div class="left">
+          <a href="">
+            <i class="fas fa-angle-left    "></i>
+          </a>
+        </div>
+        <canvas id="pdf"></canvas>
+        <div class="right">
+          <a href="">
+            <i class="fas fa-angle-right    "></i>
+          </a>
+        </div>
+        <div class="bottom">
+          <span class="page-number">
+            Page 
+            <input type="number" id="input-pn" value="1" min="1" max="<%= book.pages %>">
+            /
+            <%= book.pages %>
+          </span>
+        </div>
+      </section>
+    </div>
+
+    <% include partials/footer %>
+  </div>
+  <% include partials/commonscripts %>
+  <script src="/javascripts/pdf.js"></script>
+  <script>
+    var book = eval(<%- JSON.stringify(book) %>);
+    var url = '/content/books/' + book.url_pdf;
+    var pageRendering = false;
+    var page = 1;
+    var loadingTask = PDFJS.getDocument(encodeURI(url));
+    renderPage();
+
+    $('#book-content .right').click(function (e) {
+      e.preventDefault();
+      if (pageRendering == false) {
+        page += 1;
+        renderPage();
+      }
+    });
+
+    $('#book-content .left').click(function (e) {
+      e.preventDefault();
+      if (pageRendering == false) {
+        page -= 1;
+        renderPage();
+      }
+    });
+
+    function displayLeftRight () {
+      if (page > 1) {
+        if ($('#book-content .left').css('display') == 'none') {
+          $('#book-content .left').css('display','flex');
+        }
+      } else {
+        if ($('#book-content .left').css('display') == 'flex') {
+          $('#book-content .left').css('display','none');
+        }
+      }
+
+      if (page < book.pages) {
+        if ($('#book-content .right').css('display') == 'none') {
+          $('#book-content .right').css('display','flex');
+        }
+      } else {
+        if ($('#book-content .right').css('display') == 'flex') {
+          $('#book-content .right').css('display','none');
+        }
+      }
+    }
+
+    $('#input-pn').keyup(function (e) { 
+      e.preventDefault();
+      var inputPN = $('#input-pn').val().trim();
+      if (inputPN < 0) {
+        $('#input-pn').val(1);
+      }
+      if (inputPN > book.pages) {
+        $('#input-pn').val(book.pages);
+      }
+      if ($('#input-pn').val() != "" && $('#input-pn').val() != page && $('#input-pn').val() != 0) {
+        if (pageRendering == false) {
+          page = Number($('#input-pn').val());
+          renderPage();
+        }
+      }
+    });
+
+    function renderPage () {
+      if (page <= book.pages && pageRendering == false && page > 0) {
+        $('.fa-pulse').css('display', 'block');
+        pageRendering = true;
+        displayLeftRight();
+        $('#book-content .bottom .page-number #input-pn').val(page);
+        loadingTask.promise.then(
+          function (pdf) {
+            // Load information from the first page.
+            pdf.getPage(page).then(function (page) {
+              var scale = 1;
+              var viewport = page.getViewport(scale);
+
+              // Apply page dimensions to the <canvas> element.
+              var canvas = document.getElementById("pdf");
+              var context = canvas.getContext("2d");
+              canvas.height = viewport.height;
+              canvas.width = viewport.width;
+
+              // Render the page into the <canvas> element.
+              var renderContext = {
+                canvasContext: context,
+                viewport: viewport
+              };
+              page.render(renderContext).then(function () {
+                // console.log("Page rendered!");
+                $('.fa-pulse').css('display', 'none');
+                pageRendering = false;
+              });
+            });
+          },
+          function (reason) {
+            console.error(reason);
+          }
+        );
+      }
+    }
+  </script>
+</body>
+
+</html>

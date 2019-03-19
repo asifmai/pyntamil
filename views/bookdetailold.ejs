@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ta">
+
+<head>
+  <% include partials/commonhead %>
+</head>
+
+<body>
+  <div class="body-wrapper">
+    <% include partials/header %>
+    <% include partials/stbutton %>
+    <div class="body-content">
+      <section id="book-header">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 ml-auto">
+              <h2 class="book-title">
+                <%= book.name %>
+              </h2>
+              <p class="mb-0">
+                <%= book.tagline %>
+              </p>
+              <p class="text-muted book-category mb-0">
+                <%= book.category %>
+              </p>
+              <div class="row">
+                <div class="col">
+                  <div class="rate">
+                    <input type="radio" id="star5" name="rate" value="5" />
+                    <label for="star5" title="text">5 stars</label>
+                    <input type="radio" id="star4" name="rate" value="4" />
+                    <label for="star4" title="text">4 stars</label>
+                    <input type="radio" id="star3" name="rate" value="3" />
+                    <label for="star3" title="text">3 stars</label>
+                    <input type="radio" id="star2" name="rate" value="2" />
+                    <label for="star2" title="text">2 stars</label>
+                    <input type="radio" id="star1" name="rate" value="1" />
+                    <label for="star1" title="text">1 star</label>
+                  </div>
+                  <p class="text-muted rating-para">
+                    <span class="score">Score:
+                      <%= score %></span>
+                    &nbsp; | &nbsp;
+                    <span class="votes">
+                      <%= book.ratings.length %> வாக்களிப்பு</span>
+                  </p>
+                </div>
+              </div>
+              <a href="/readbook/<%= book.id %>" class="btn kids-button" englishname="read-book-button">நூலினை
+                படிக்கவும்</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="book-details">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="book-tile mx-auto bd">
+                <!-- <a href="" class="book-link" data-toggle="modal"> -->
+                <!-- <div class="book-border"></div> -->
+                <div class="book-img">
+                  <img src="/content/covers/<%= book.url_cover %>" alt="<%= book.name %>">
+                </div>
+                <div class="book-info">
+                  <div class="left">நூலாக்கம்:
+                    <%= book.author %>
+                  </div>
+                  <div class="right">வருடம்:
+                    <%= book.year %>
+                  </div>
+                </div>
+                <!-- </a> -->
+              </div>
+              <div id="social">
+                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore facebookBtn smGlobalBtn">
+                  <i class="fab fa-facebook-f    "></i>
+                </a>
+                <a target="_blank" class="twitterBtn smGlobalBtn" href="">
+                  <i class="fab fa-twitter    "></i>
+                </a>
+                <a target="_blank" class="tumblrBtn smGlobalBtn" href="#">
+                  <i class="fab fa-tumblr    "></i>
+                </a>
+                <a target="_blank" class="pinterestBtn smGlobalBtn" href="#">
+                  <i class="fab fa-pinterest-p    "></i>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <h3 class="redline left" englishname="about-the-book">புத்தகம் பற்றிய சிறுவுரை</h3>
+              <div class="description-paragraph">
+                <p>
+                  <%= book.description %>
+                </p>
+                <div>மேலும் காண...</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="related-books">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <h3 class="redline" englishname="related-books">ஒத்த புத்தகங்கள்</h3>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <% for (var a = 0; a < books.length; a++) { %>
+            <% if (books[a].id != book.id) { %>
+            <div class="col-md-3 col-sm-6">
+              <div class="book-tile mx-auto mb-4">
+                <a href="/bookdetail/<%= books[a].id %>" class="book-link" data-toggle="modal">
+                  <!-- <div class="book-border"></div> -->
+                  <div class="book-img">
+                    <img src="/content/covers/<%= books[a].url_cover %>" alt="<%= books[a].name %>">
+                  </div>
+                  <div class="book-info">
+                    <div class="left">நூலாக்கம்:
+                      <%= books[a].author %>
+                    </div>
+                    <div class="right">வருடம்:
+                      <%= books[a].year %>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <% } %>
+            <% } %>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <% include partials/footer %>
+  </div>
+  <% include partials/commonscripts %>
+  <script src="/javascripts/multislider.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      var score = eval(<%- JSON.stringify(score) %>)
+      var book = eval(<%- JSON.stringify(book) %>)
+      var fullScore = Math.round(score)
+      var twitterLink = "https://twitter.com/intent/tweet?url=" + window.location.href
+      $('.twitterBtn.smGlobalBtn').attr('href', twitterLink);
+      var pinterestLink = "http://pinterest.com/pin/create/button/?url=" + window.location.href + "&media=&description=";
+      $('.pinterestBtn.smGlobalBtn').attr('href', pinterestLink);
+      var tumblrLink = "http://www.tumblr.com/share/link?url=" + window.location.href;
+      $('.tumblrBtn.smGlobalBtn').attr('href', tumblrLink);
+      // <input type="radio" id="star5" name="rate" value="5" />
+      var input = 'input[type="radio"][value="' + fullScore + '"]'
+      $(input).prop('checked', true)
+      var twitterShareURL = "https://twitter.com/intent/tweet?url=" + window.location.href;
+      $('.twitterBtn').attr('href', twitterShareURL);
+
+      $('.description-paragraph div').click(function (e) {
+        e.preventDefault();
+        if ($('.description-paragraph').css('height') == '100px') {
+          $('.description-paragraph').css('height', 'unset');
+          $('.description-paragraph div').text('சுருக்கிடவும்...');
+        } else {
+          $('.description-paragraph').css('height', '100px');
+          $('.description-paragraph div').text('மேலும் காண...');
+        }
+      });
+      // <label for="star5" title="text">
+      $('label[title="text"]').click(function (e) { 
+        var stars = Number($(this).attr("for").charAt(4));
+        var url = "/ratebook/" + book.id + "/" + stars;
+        $.ajax({
+          type: "post",
+          url: url,
+          success: function (response) {
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

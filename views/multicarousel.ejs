@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ta">
+
+<head>
+  <% include partials/commonhead %>
+  <link rel="stylesheet" href="/stylesheets/multicarousel.css">
+</head>
+
+<body>
+  <div class="body-wrapper">
+    <% include partials/header %>
+    <% include partials/stbutton %>
+    <div class="body-content">
+      <section id="book-content">
+        <div class="container">
+        <div class="multi-carousel">
+          <div class="multi-carousel-reel">
+          <div class="multi-carousel-item">
+            <img src="/content/covers/kai.jpg" alt="">
+          </div>
+          <div class="multi-carousel-item">
+            <img src="/content/covers/kai.jpg" alt="">
+          </div>
+          <div class="multi-carousel-item">
+            <img src="/content/covers/kai.jpg" alt="">
+          </div>
+          <div class="multi-carousel-item">
+            <img src="/content/covers/kai.jpg" alt="">
+          </div>
+          <div class="multi-carousel-item">
+            <img src="/content/covers/kai.jpg" alt="">
+          </div>
+          <div class="multi-carousel-item">
+            <img src="/content/covers/kai.jpg" alt="">
+          </div>
+          <div class="multi-carousel-item">
+            <img src="/content/covers/kai.jpg" alt="">
+          </div>
+          <div class="multi-carousel-item">
+            <img src="/content/covers/kai.jpg" alt="">
+          </div>
+          <div class="multi-carousel-item">
+            <img src="/content/covers/kai.jpg" alt="">
+          </div>
+        </div>
+            <div class="multi-carousel-btn btn-right">
+              <i class="fas fa-chevron-circle-right    "></i>
+            </div>
+            <div class="multi-carousel-btn btn-left">
+              <i class="fas fa-chevron-circle-left    "></i>
+            </div>
+        </div>
+      </div>
+      </section>
+    </div>
+    <% include partials/footer %>
+  </div>
+  <% include partials/commonscripts %>
+  <script>
+    $('.multi-carousel-btn.btn-right').click(function (e) {
+      e.preventDefault();
+      var width = $('.multi-carousel-reel').css('width');
+      console.log(width);
+      var currentLeft = $('.multi-carousel-reel').css('left')
+      var currentLeftNum = Number(currentLeft.slice(0,currentLeft.length-2))
+      var newLeft = currentLeftNum - 216;
+      console.log(newLeft)
+
+      $('.multi-carousel-reel').css('left', newLeft + 'px')
+    });
+
+    $('.multi-carousel-btn.btn-left').click(function (e) {
+      e.preventDefault();
+      var currentLeft = $('.multi-carousel-reel').css('left')
+      var currentLeftNum = Number(currentLeft.slice(0,currentLeft.length-2))
+      if (currentLeftNum < 0) {
+        var newLeft = currentLeftNum + 216;
+        $('.multi-carousel-reel').css('left', newLeft + 'px')
+      }
+    });
+  </script>
+</body>
+
+</html>

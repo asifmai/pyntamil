@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ta">
+
+<head>
+  <% include ../partials/commonhead %>
+</head>
+
+<body>
+  <div class="body-wrapper">
+    <% include ../partials/header %>
+    <% include ../partials/stbutton %>
+    <div class="body-content">
+      <form action="/admin/addbook" method="POST" encType="multipart/form-data">
+        <div class="container my-4">
+
+          <!-- Form Row: Title -->
+          <div class="row mb-4">
+            <div class="col text-center">
+              <h2 class="redline">Add Book</h2>
+            </div>
+          </div>
+
+          <!-- Form Row 1: Book name , Book Format -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="name">Book Name <span class="text-danger">*</span></label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="eg. நீரைவிட்டு வந்த மீன்" aria-describedby="helpId" required>
+                <small id="helpId" class="text-muted">&nbsp;</small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="format">Book Format <span class="text-danger">*</span></label>
+                <select class="form-control" name="format" id="format" required>
+                  <option value="Potrait">Potrait</option>
+                  <option value="Landscape">Landscape</option>
+                </select>
+                <small id="helpId" class="text-muted">&nbsp;</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Row: Category , Year -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="category">Category <span class="text-danger">*</span></label>
+                <select class="form-control" name="category" id="category" required>
+                  <option value="படப்புத்தகம்">படப்புத்தகம்</option>
+                  <option value="பாடம்">பாடம்</option>
+                  <option value="கதை">கதை</option>
+                  <option value="விளையாட்டு">விளையாட்டு</option>
+                  <option value="இதழ்">இதழ்</option>
+                  <option value="வரலாறு">வரலாறு</option>
+                  <option value="பக்தி">பக்தி</option>
+                </select>
+                <small id="helpId" class="text-muted">&nbsp;</small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="year">Year <span class="text-danger">*</span></label>
+                <input type="number" min="0" max="9999" name="year" id="year" class="form-control" placeholder="eg. 2018" aria-describedby="helpId" required>
+                <small id="helpId" class="text-muted">&nbsp;</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Row: Pages , Price -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="pages">Number of Pages <span class="text-danger">*</span></label>
+                <input type="number" min="1" max="999999" name="pages" id="pages" class="form-control" placeholder="eg. 20" aria-describedby="helpId" required>
+                <small id="helpId" class="text-muted">&nbsp;</small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="price">Price <span class="text-danger">*</span></label>
+                <input type="number" min="0" name="price" id="price" class="form-control" placeholder="eg. 0" aria-describedby="helpId" required>
+                <small id="helpId" class="text-muted">&nbsp;</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Row: Sequence , Tagline -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="sequence">Sequence</label>
+                <input type="text" name="sequence" id="sequence" class="form-control" placeholder="" aria-describedby="helpId">
+                <small id="helpId" class="text-muted">&nbsp;</small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="tagline">Tagline <span class="text-danger">*</span></label>
+                <input type="text" name="tagline" id="tagline" class="form-control" placeholder="eg. குட்டி மீன்கள் கொண்டு தமிழைத் தட்டித் தாருங்கள் " aria-describedby="helpId" required>
+                <small id="helpId" class="text-muted">&nbsp;</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Row: Description , tags -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="description">Book Description <span class="text-danger">*</span></label>
+                <input type="text" name="description" id="description" class="form-control" placeholder="" aria-describedby="helpId" required>
+                <small id="helpId" class="text-muted">&nbsp;</small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="tags">Tags <span class="text-danger">*</span></label>
+                <input type="text" name="tags" id="tags" class="form-control" placeholder="eg. குழந்தை, சிறுவர், பாலபாடம்" aria-describedby="helpId" required>
+                <small id="helpId" class="text-muted">Enter tags seperated by a comma(,)</small>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Form Row: Minimum Age , Maximum Age -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="minimum_age">Minimum Age <span class="text-danger">*</span></label>
+                <input type="number" min="0" max="100" name="minimum_age" id="minimum_age" class="form-control" placeholder="eg. 3" aria-describedby="helpId" required>
+                <small id="helpId" class="text-muted">&nbsp;</small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="maximum_age">Maximum Age <span class="text-danger">*</span></label>
+                <input type="number" min="0" max="100" name="maximum_age" id="maximum_age" class="form-control" placeholder="eg. 10" aria-describedby="helpId" required>
+                <small id="helpId" class="text-muted">&nbsp;</small>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Form Row: Author , Illustrator -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="author">Author <span class="text-danger">*</span></label>
+                <input type="text" name="author" id="author" class="form-control" placeholder="eg. அனந்த ரா. நவநீதகோபாலன்" aria-describedby="helpId" required>
+                <small id="helpId" class="text-muted">&nbsp;</small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="illustrator">Illustrator</label>
+                <input type="text" name="illustrator" id="illustrator" class="form-control" placeholder="" aria-describedby="helpId">
+                <small id="helpId" class="text-muted">&nbsp;</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Row: Material -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="material">Material <span class="text-danger">*</span></label>
+                <input type="text" name="material" id="material" class="form-control" placeholder="eg. book, paperback" aria-describedby="helpId" required>
+                <small id="helpId" class="text-muted">Enter Material seperated by a comma(,)</small>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- Form Row: PDF , Cover -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="url_pdf">PDF File <span class="text-danger">*</span></label>
+                <input type="file" name="url_pdf" id="url_pdf" class="form-control" placeholder="" aria-describedby="helpId" required>
+                <small id="helpId" class="text-muted">File Name must be in small case without spaces</small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="url_cover">Cover Image <span class="text-danger">*</span></label>
+                <input type="file" name="url_cover" id="url_cover" class="form-control" placeholder="" aria-describedby="helpId" required>
+                <small id="helpId" class="text-muted">The cover dimensions must be 495 x 645. </small>
+                <small id="helpId" class="text-muted">File name must be in small case without spaces</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Row: EPUB , Mobile -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="url_epub">EPUB File</label>
+                <input type="file" name="url_epub" id="url_epub" class="form-control" placeholder="" aria-describedby="helpId">
+                <small id="helpId" class="text-muted">File Name must be in small case</small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="url_mobile">Mobile File</label>
+                <input type="file" name="url_mobile" id="url_mobile" class="form-control" placeholder="" aria-describedby="helpId">
+                <small id="helpId" class="text-muted">File name must be in small case</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Row: Audio -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="url_audio">Audio File</label>
+                <input type="file" name="url_audio" id="url_audio" class="form-control" placeholder="" aria-describedby="helpId">
+                <small id="helpId" class="text-muted">File Name must be in small case</small>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <!-- Form Row: Secret -->
+          <div class="row mb-4">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="secret">What's the Secret?</label>
+                <input type="text" name="secret" id="secret" class="form-control" placeholder="" aria-describedby="helpId" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Row: Submit Button -->
+          <div class="row">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-primary btn-lg">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <% include ../partials/footer %>
+  </div>
+  <% include ../partials/commonscripts %>
+</body>
+</html>

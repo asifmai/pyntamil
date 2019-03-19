@@ -1,0 +1,465 @@
+/* Font Import */
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,600,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,500,600,700,800');
+@import url('https://fonts.googleapis.com/css?family=Muli:300,400,600,700,800');
+
+/* Overall  */
+html {
+  scroll-behavior: smooth;
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  font-family: 'Opan Sans', 'Poppins', 'Muli', 'Roboto';
+  color: #212121;
+  font-size: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+.body-content {
+  /* margin-bottom: 2em; */
+  /* margin-top: 6em; */
+}
+
+/* Forms */
+.form-group label {
+  margin-bottom: 0.2em;
+}
+
+/* Scroll to top button */
+.st-button {
+  display: none;
+  position: fixed;
+  bottom: 45px;
+  right: 20px;
+  z-index: 99;
+  background-color: #71D467;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 28px;
+  border: 2px solid white;
+  transition: 200ms all ease;
+  width: 40px;
+  height: 40px;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.st-button:hover {
+  color: #71D467;
+  background: white;
+  border: 2px solid #71D467;
+}
+
+
+#display-section {
+  background: url('/images/hero.jpg');
+  position: relative;
+  padding: 4em 0;
+}
+
+#display-section .overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.5);
+}
+
+.redline:after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: #FF0039;
+  margin: 0.5em auto;
+}
+
+.book-tile {
+  transition: 200ms all ease-in-out;
+  max-width: 200px;
+  position: relative;
+  overflow: hidden;
+  border: 5px solid white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 2px #70D468;
+}
+
+.bom-title div{
+  width: 350px;
+  margin: auto;
+  padding: 0.3em;
+  font-size: 1.2em;
+}
+
+.bom-name:hover{
+  text-decoration: none;
+  color: #62b946;
+}
+
+.bom-tagline:hover {
+  text-decoration: none;
+}
+
+.bom-name, .bom-tagline {
+  color: #6bff3a;
+}
+
+.book-tile.bom {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bom-heading {
+  background: #F9A825;
+  color: #712aa2;
+}
+
+.bom-heading i {
+  color: #712aa2;
+}
+
+.book-info {
+  position: absolute;
+  bottom: -66px;
+  color: white;
+  background: linear-gradient(0deg,black,rgba(255,255,255,0));
+  transition: 200ms all ease-in-out;
+  font-size: 0.8em;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5em;
+  font-size: 0.7em;
+}
+
+.book-info .right {
+  text-align: right;
+}
+
+
+.book-info .left {
+  text-align: left;
+}
+
+.book-description-main {
+  font-size: 0.9rem;
+}
+
+.book-title {
+  color: #712AA2;
+}
+
+.section-header {
+  text-align: left;
+}
+
+.redline.left:after {
+  margin-left: 0;
+}
+
+.section-header:after {
+  margin-left: 0;
+}
+
+.book-tile:hover .book-info {
+  bottom: 0;
+}
+
+.book-tile:hover{
+  box-shadow: none;
+}
+
+.book-tile .book-border {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  background: url('/images/bookborder.jpg');
+  background-size: 50%;
+}
+
+.book-tile .book-img img {
+  width: 100%;
+}
+
+#all-section {
+  padding: 4em 0;
+  background: #fff8e1;
+}
+
+#book-header {
+	padding: 3em 0;
+  background: #FFF9C4;
+  /* background: url('/images/hero.jpg'); */
+  /* position: relative; */
+}
+
+.kids-button {
+  border-radius: 50px;
+  background: #712AA2;
+  color: white;
+  font-weight: 500;
+  word-spacing: 10px;
+  padding: 0.5em 1.4em;
+  font-size: 1.1em;
+  border: 2px solid #712AA2;
+}
+
+.kids-button:hover {
+  border: 2px solid #712AA2;
+  background: transparent;
+  color: #712AA2;
+}
+
+.rating-para {
+	margin-top: 14px;
+	/* text-align: right; */
+	margin-left: 1em;
+}
+
+.book-tile.bd {
+  margin-top: -11em;
+  max-width: 250px;
+}
+
+.description-paragraph p {
+  margin-bottom: 1.5em;
+  font-size: 0.9rem;
+}
+
+.description-paragraph {
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  transition: 200ms all ease-in-out;
+}
+
+.description-paragraph div {
+  position: absolute;
+  bottom: 0;
+  background: white;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  background: #f4e5ff;
+  font-size: 0.9em;
+}
+
+#related-books, #book-details {
+  padding: 3em 0;
+  /* background: #00AFF3; */
+}
+
+#related-books .redline:after {
+  margin-left: 0;
+}
+
+/* social buttons */
+
+#social {
+	margin: 1em;
+	/* text-align: right; */
+	display: flex;
+	justify-content: center;
+}
+
+.smGlobalBtn {
+	/* global button class */
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	border: 2px solid #ddd;
+	box-shadow: 0 3px 3px #999;
+	padding: 0px;
+	text-decoration: none;
+	text-align: center;
+	color: #fff;
+	font-size: 18px;
+	font-weight: normal;
+	line-height: 2em;
+	border-radius: 27px;
+	-moz-border-radius: 27px;
+	-webkit-border-radius: 27px;
+	margin-right: 10px;
+}
+
+.smGlobalBtn:hover {
+	text-decoration: none;
+}
+
+/* facebook button class*/
+.facebookBtn {
+	background: #4060A5;
+}
+
+.facebookBtn:hover {
+	color: #4060A5;
+	background: #fff;
+	border-color: #4060A5;
+	/* change the border color on mouse hover */
+}
+
+/* twitter button class*/
+.twitterBtn {
+	background: #00ABE3;
+}
+
+.twitterBtn:hover {
+	color: #00ABE3;
+	background: #fff;
+	border-color: #00ABE3;
+}
+
+/* google plus button class*/
+.instaBtn {
+	background: #e64522;
+}
+
+.instaBtn:before {
+	font-family: "FontAwesome";
+	content: "\f16d";
+	/* add instagram icon */
+}
+
+.instaBtn:hover {
+	color: #e64522;
+	background: #fff;
+	border-color: #e64522;
+}
+
+/* linkedin button class*/
+.vimeoBtn {
+	background: #0094BC;
+}
+
+.vimeoBtn:before {
+	font-family: "FontAwesome";
+	content: "\f27d";
+	/* add linkedin icon */
+}
+
+.vimeoBtn:hover {
+	color: #0094BC;
+	background: #fff;
+	border-color: #0094BC;
+}
+
+/* pinterest button class*/
+.pinterestBtn {
+	background: #cb2027;
+}
+
+.pinterestBtn:hover {
+	color: #cb2027;
+	background: #fff;
+	border-color: #cb2027;
+}
+
+/* tumblr button class*/
+.tumblrBtn {
+	background: #3a5876;
+}
+
+.tumblrBtn:hover {
+	color: #3a5876;
+	background: #fff;
+	border-color: #3a5876;
+}
+
+/* rss button class*/
+.rssBtn {
+	background: #e88845;
+}
+
+.rssBtn:before {
+	font-family: "FontAwesome";
+	content: "\f09e";
+	/* add rss icon */
+}
+
+.rssBtn:hover {
+	color: #e88845;
+	background: #fff;
+	border-color: #e88845;
+}
+
+
+/* Ratings */
+.rate {
+  float: left;
+  height: 46px;
+}
+.rate:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+}
+.rate:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+.rate:not(:checked) > label:before {
+  content: '★ ';
+}
+.rate > input:checked ~ label {
+  color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+@media screen and (max-width: 576px) {
+  .book-tile{
+    margin-top: 1.5em;
+  }
+
+  body {
+    font-size: 90%;
+  }
+
+  .body-content {
+    /* margin-top: 5em; */
+  }
+  
+}
+
+@media screen and (max-width: 768px) {
+  .rating-para {
+    /* margin-top: 0; */
+    /* text-align: left; */
+  }
+  
+    .book-tile.bd {
+      margin-top: 0;
+    }
+}

@@ -1,0 +1,25 @@
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2"></script>
+
+<header>
+  <nav class="navbar navbar-expand navbar-light navbar-header">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="/images/logo.png" alt="PYNTAMIL" title="PYNTAMIL" class="header-logo">
+      </a>
+      <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <% if (title == "பைந்தமிழ் | படி") { %>
+            <% if (book.format == 'Landscape') { %>
+            <img src="/images/landscape.png" alt="" class="orientation-image landscape">
+            <% } else { %>
+            <img src="/images/potrait.png" alt="" class="orientation-image potrait">
+            <% } %>
+            <% } %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
