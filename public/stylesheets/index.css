@@ -100,7 +100,7 @@ h6 {
 }
 
 .bom-title div{
-  width: 350px;
+  /* width: 350px; */
   margin: auto;
   padding: 0.3em;
   font-size: 1.2em;
@@ -117,6 +117,10 @@ h6 {
 
 .bom-name, .bom-tagline {
   color: #6bff3a;
+}
+
+.bom-name h2 {
+  font-weight: bold;
 }
 
 .book-tile.bom {
@@ -162,6 +166,7 @@ h6 {
 
 .book-title {
   color: #712AA2;
+  font-weight: bold;
 }
 
 .section-header {

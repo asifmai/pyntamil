@@ -46,6 +46,7 @@
     var page = 1;
     var loadingTask = PDFJS.getDocument(encodeURI(url));
     renderPage();
+    scrollToBook();
 
     $('#book-content .right').click(function (e) {
       e.preventDefault();
@@ -138,6 +139,12 @@
           }
         );
       }
+    }
+
+    function scrollToBook() {
+      $([document.documentElement, document.body]).animate({
+        scrollTop: $("#book-content").offset().top
+      }, 200);
     }
   </script>
 </body>
