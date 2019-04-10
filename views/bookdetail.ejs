@@ -3,6 +3,11 @@
 
 <head>
   <% include partials/commonhead %>
+  <meta property="og:url" content="http://pyntamil.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="PYNTAMIL" />
+  <meta property="og:description" content="Kids reading books in tamil" />
+  <meta property="og:image" content="http://pyntamil.com/images/logo.png" />
   <link rel="stylesheet" href="/stylesheets/multicarousel.css">
 </head>
 
@@ -69,11 +74,11 @@
                     <%= book.year %>
                   </div>
                 </div>
-                <!-- </a> -->
               </div>
               <div id="social">
-                <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore facebookBtn smGlobalBtn">
-                  <i class="fab fa-facebook-f    "></i>
+                <a href="someurl.com/some-article" data-image="article-1.jpg" data-title="Article Title"
+                  data-desc="Some description for this article" class="facebookBtn smGlobalBtn">
+                  <i class="fab fa-facebook    "></i>
                 </a>
                 <a target="_blank" class="twitterBtn smGlobalBtn" href="">
                   <i class="fab fa-twitter    "></i>
@@ -130,8 +135,9 @@
                 </div>
                 <% } %>
               </div>
-              <button class="btn btn-primary leftLst"><</button> 
-              <button class="btn btn-primary rightLst">></button>
+              <button class="btn btn-primary leftLst">
+                <</button> <button class="btn btn-primary rightLst">>
+              </button>
             </div>
           </div>
         </div>
@@ -144,24 +150,37 @@
   <% include partials/commonscripts %>
   <script src="/javascripts/multicarousel.js"></script>
   <script>
+    var score = eval(<%- JSON.stringify(score) %>)
+    var book = eval(<%- JSON.stringify(book) %>)
+    var fullScore = Math.round(score)
+
     $(document).ready(function () {
       showHideButtons();
-      var score = eval(<%- JSON.stringify(score) %>)
-      var book = eval(<%- JSON.stringify(book) %>)
-      var fullScore = Math.round(score)
+      fbInitialize();
 
-      var twitterLink = href="https://twitter.com/intent/tweet?url=" + window.location.href + 
-      "&text=PYNTAMIL - Read Book " + book.name;
+      $('.facebookBtn').attr('href', 'http://pyntamil.com/bookdetail/' + book.id);
+      $('.facebookBtn').attr('data-image', 'http://pyntamil.com/content/covers/' + book.url_cover);
+      $('.facebookBtn').attr('data-title', "பைந்தமிழ்: " + book.name);
+      $('.facebookBtn').attr('data-desc', book.description);
+
+      $('.facebookBtn').click(function (e) {
+        e.preventDefault();
+        var elem = $(this);
+        postToFeed(elem.data('title'), elem.data('desc'), elem.prop('href'), elem.data('image'));
+        return false;
+      });
+      var twitterLink = href = "https://twitter.com/intent/tweet?url=" + window.location.href +
+        "&text=PYNTAMIL - Read Book " + book.name;
       $('.twitterBtn').attr('href', twitterLink);
 
       var pinterestLink = "http://pinterest.com/pin/create/button/?url=" + window.location.href +
-      "&media=" + window.location.origin + "/content/covers/" + book.url_cover + 
-      "&description=PYNTAMIL - Read Book " + book.name;
+        "&media=" + window.location.origin + "/content/covers/" + book.url_cover +
+        "&description=PYNTAMIL - Read Book " + book.name;
       $('.pinterestBtn.smGlobalBtn').attr('href', pinterestLink);
 
       var tumblrLink = "http://www.tumblr.com/share/link?url=https://www.pyntamil.herokuapp.com" +
-      "&name=PYNTAMIL - Read Book " + book.name + "&description=" + book.tagline +
-      "&content=" + "https://pyntamil.herokuapp.com/content/covers/en.jpg" 
+        "&name=PYNTAMIL - Read Book " + book.name + "&description=" + book.tagline +
+        "&content=" + "https://pyntamil.herokuapp.com/content/covers/en.jpg"
       $('.tumblrBtn.smGlobalBtn').attr('href', tumblrLink);
       var input = 'input[type="radio"][value="' + fullScore + '"]'
       $(input).prop('checked', true)
@@ -187,7 +206,7 @@
         });
       });
 
-      $(window).resize(function () { 
+      $(window).resize(function () {
         showHideButtons();
       });
     });
@@ -220,6 +239,43 @@
         $('.rightLst').removeClass('d-none')
       }
     }
+
+    function fbInitialize() {
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: '1046186885592558',
+          status: true,
+          cookie: true,
+          xfbml: true
+        });
+      };
+      (function (d, debug) {
+        var js, id = 'facebook-jssdk',
+          ref = d.getElementsByTagName('script')[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement('script');
+        js.id = id;
+        js.async = true;
+        js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+        ref.parentNode.insertBefore(js, ref);
+      }(document, /*debug*/ false));
+    }
+
+    
+    function postToFeed(title, desc, url, image) {
+        var obj = {
+          method: 'feed',
+          link: url,
+          picture: 'http://pyntamil.com/content/covers/' + image,
+          name: title,
+          description: desc
+        };
+
+        function callback(response) {}
+        FB.ui(obj, callback);
+      }
   </script>
 </body>
 
